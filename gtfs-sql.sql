@@ -1,5 +1,5 @@
 CREATE TABLE `agency` (
-	id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
     agency_id VARCHAR(100),
     agency_name VARCHAR(255) NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE `agency` (
 );
 
 CREATE TABLE `calendar_dates` (
-	id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
     service_id VARCHAR(255) NOT NULL,
     `date` VARCHAR(8) NOT NULL,
@@ -21,23 +21,23 @@ CREATE TABLE `calendar_dates` (
 );
 
 CREATE TABLE `calendar` (
-	id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
     service_id VARCHAR(255) NOT NULL,
-	monday TINYINT(1) NOT NULL,
-	tuesday TINYINT(1) NOT NULL,
-	wednesday TINYINT(1) NOT NULL,
-	thursday TINYINT(1) NOT NULL,
-	friday TINYINT(1) NOT NULL,
-	saturday TINYINT(1) NOT NULL,
-	sunday TINYINT(1) NOT NULL,
-	start_date VARCHAR(8) NOT NULL,	
-	end_date VARCHAR(8) NOT NULL,
-	KEY `service_id` (service_id)
+    monday TINYINT(1) NOT NULL,
+    tuesday TINYINT(1) NOT NULL,
+    wednesday TINYINT(1) NOT NULL,
+    thursday TINYINT(1) NOT NULL,
+    friday TINYINT(1) NOT NULL,
+    saturday TINYINT(1) NOT NULL,
+    sunday TINYINT(1) NOT NULL,
+    start_date VARCHAR(8) NOT NULL,	
+    end_date VARCHAR(8) NOT NULL,
+    KEY `service_id` (service_id)
 );
 
 CREATE TABLE `fare_attributes` (
-	id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
     fare_id VARCHAR(100),
     price VARCHAR(50) NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE `fare_attributes` (
 );
 
 CREATE TABLE `fare_rules` (
-	id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
     fare_id VARCHAR(100),
     route_id VARCHAR(100),
@@ -63,7 +63,7 @@ CREATE TABLE `fare_rules` (
 );
 
 CREATE TABLE `feed_info` (
-	id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
     feed_publisher_name VARCHAR(100),
     feed_publisher_url VARCHAR(255) NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE `feed_info` (
 );
 
 CREATE TABLE `frequencies` (
-	id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
     trip_id VARCHAR(100) NOT NULL,
     start_time VARCHAR(8) NOT NULL,
@@ -85,23 +85,23 @@ CREATE TABLE `frequencies` (
 );
 
 CREATE TABLE `routes` (
-	id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
     route_id VARCHAR(100),
-	agency_id VARCHAR(50),
-	route_short_name VARCHAR(50) NOT NULL,
-	route_long_name VARCHAR(255) NOT NULL,
-	route_type VARCHAR(2) NOT NULL, 
-	route_text_color VARCHAR(255),
-	route_color VARCHAR(255),
-	route_url VARCHAR(255),
-	route_desc VARCHAR(255),
-	KEY `agency_id` (agency_id),
-	KEY `route_type` (route_type)
+    agency_id VARCHAR(50),
+    route_short_name VARCHAR(50) NOT NULL,
+    route_long_name VARCHAR(255) NOT NULL,
+    route_type VARCHAR(2) NOT NULL, 
+    route_text_color VARCHAR(255),
+    route_color VARCHAR(255),
+    route_url VARCHAR(255),
+    route_desc VARCHAR(255),
+    KEY `agency_id` (agency_id),
+    KEY `route_type` (route_type)
 );
 
 CREATE TABLE `shapes` (
-	id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
     shape_id VARCHAR(100) NOT NULL,
     shape_pt_lat DECIMAL(8,6) NOT NULL,
@@ -112,52 +112,52 @@ CREATE TABLE `shapes` (
 );
 
 CREATE TABLE `stop_times` (
-	id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
     trip_id VARCHAR(100) NOT NULL,
-	arrival_time VARCHAR(8) NOT NULL,
-	arrival_time_seconds INT(100),
-	departure_time VARCHAR(8) NOT NULL,
-	departure_time_seconds INT(100),
-	stop_id VARCHAR(100) NOT NULL,
-	stop_sequence VARCHAR(100) NOT NULL,
-	stop_headsign VARCHAR(50),
-	pickup_type VARCHAR(2),
-	drop_off_type VARCHAR(2),
-	shape_dist_traveled VARCHAR(50),
-	KEY `trip_id` (trip_id),
-	KEY `arrival_time_seconds` (arrival_time_seconds),
-	KEY `departure_time_seconds` (departure_time_seconds),
-	KEY `stop_id` (stop_id),
-	KEY `stop_sequence` (stop_sequence),
-	KEY `pickup_type` (pickup_type),
-	KEY `drop_off_type` (drop_off_type)
+    arrival_time VARCHAR(8) NOT NULL,
+    arrival_time_seconds INT(100),
+    departure_time VARCHAR(8) NOT NULL,
+    departure_time_seconds INT(100),
+    stop_id VARCHAR(100) NOT NULL,
+    stop_sequence VARCHAR(100) NOT NULL,
+    stop_headsign VARCHAR(50),
+    pickup_type VARCHAR(2),
+    drop_off_type VARCHAR(2),
+    shape_dist_traveled VARCHAR(50),
+    KEY `trip_id` (trip_id),
+    KEY `arrival_time_seconds` (arrival_time_seconds),
+    KEY `departure_time_seconds` (departure_time_seconds),
+    KEY `stop_id` (stop_id),
+    KEY `stop_sequence` (stop_sequence),
+    KEY `pickup_type` (pickup_type),
+    KEY `drop_off_type` (drop_off_type)
 );
 
 CREATE TABLE `stops` (
-	id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
     stop_id VARCHAR(255),
     stop_code VARCHAR(50),
-	stop_name VARCHAR(255) NOT NULL,
-	stop_desc VARCHAR(255),
-	stop_lat DECIMAL(10,6) NOT NULL,
-	stop_lon DECIMAL(10,6) NOT NULL,
-	zone_id VARCHAR(255),
-	stop_url VARCHAR(255),
-	location_type VARCHAR(2),
-	parent_station VARCHAR(100),
-	stop_timezone VARCHAR(50),
-	wheelchair_boarding TINYINT(1),
-	KEY `zone_id` (zone_id),
-	KEY `stop_lat` (stop_lat),
-	KEY `stop_lon` (stop_lon),
-	KEY `location_type` (location_type),
-	KEY `parent_station` (parent_station)
+    stop_name VARCHAR(255) NOT NULL,
+    stop_desc VARCHAR(255),
+    stop_lat DECIMAL(10,6) NOT NULL,
+    stop_lon DECIMAL(10,6) NOT NULL,
+    zone_id VARCHAR(255),
+    stop_url VARCHAR(255),
+    location_type VARCHAR(2),
+    parent_station VARCHAR(100),
+    stop_timezone VARCHAR(50),
+    wheelchair_boarding TINYINT(1),
+    KEY `zone_id` (zone_id),
+    KEY `stop_lat` (stop_lat),
+    KEY `stop_lon` (stop_lon),
+    KEY `location_type` (location_type),
+    KEY `parent_station` (parent_station)
 );
 
 CREATE TABLE `transfers` (
-	id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
     from_stop_id INT(100) NOT NULL,
     to_stop_id VARCHAR(8) NOT NULL,
@@ -166,22 +166,22 @@ CREATE TABLE `transfers` (
 );
 
 CREATE TABLE `trips` (
-	id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
     route_id VARCHAR(100) NOT NULL,
-	service_id VARCHAR(100) NOT NULL,
-	trip_id VARCHAR(255),
-	trip_headsign VARCHAR(255),
-	trip_short_name VARCHAR(255),
-	direction_id TINYINT(1), #0 for one direction, 1 for another.
-	block_id VARCHAR(11),
-	shape_id VARCHAR(11),
-	wheelchair_accessible TINYINT(1), #0 for no information, 1 for at 
-	# least one rider accomodated on wheel chair, 2 for no riders
-	# accommodated.
-	KEY `route_id` (route_id),
-	KEY `service_id` (service_id),
-	KEY `direction_id` (direction_id),
-	KEY `block_id` (block_id),
-	KEY `shape_id` (shape_id)
+    service_id VARCHAR(100) NOT NULL,
+    trip_id VARCHAR(255),
+    trip_headsign VARCHAR(255),
+    trip_short_name VARCHAR(255),
+    direction_id TINYINT(1), #0 for one direction, 1 for another.
+    block_id VARCHAR(11),
+    shape_id VARCHAR(11),
+    wheelchair_accessible TINYINT(1), #0 for no information, 1 for at 
+    # least one rider accomodated on wheel chair, 2 for no riders
+    # accommodated.
+    KEY `route_id` (route_id),
+    KEY `service_id` (service_id),
+    KEY `direction_id` (direction_id),
+    KEY `block_id` (block_id),
+    KEY `shape_id` (shape_id)
 );
