@@ -74,7 +74,7 @@ CREATE TABLE `feed_info` (
 );
 
 CREATE TABLE `frequencies` (
-id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
     trip_id VARCHAR(100) NOT NULL,
     start_time VARCHAR(8) NOT NULL,
@@ -101,7 +101,7 @@ CREATE TABLE `routes` (
 );
 
 CREATE TABLE `shapes` (
-id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
     shape_id VARCHAR(100) NOT NULL,
     shape_pt_lat DECIMAL(8,6) NOT NULL,
@@ -157,7 +157,7 @@ CREATE TABLE `stops` (
 );
 
 CREATE TABLE `transfers` (
-id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
     from_stop_id INT(100) NOT NULL,
     to_stop_id VARCHAR(8) NOT NULL,
