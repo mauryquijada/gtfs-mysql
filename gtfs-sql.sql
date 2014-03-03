@@ -177,8 +177,10 @@ CREATE TABLE `trips` (
     block_id VARCHAR(11),
     shape_id VARCHAR(11),
     wheelchair_accessible TINYINT(1), #0 for no information, 1 for at 
-    # least one rider accomodated on wheel chair, 2 for no riders
+    # least one rider accommodated on wheel chair, 2 for no riders
     # accommodated.
+    bikes_allowed TINYINT(1), #0 for no information, 1 for at least
+    # one bicycle accommodated, 2 for no bicycles accommodated
     KEY `route_id` (route_id),
     KEY `service_id` (service_id),
     KEY `direction_id` (direction_id),
