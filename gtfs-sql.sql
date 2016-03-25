@@ -125,8 +125,6 @@ CREATE TABLE `stop_times` (
     timepoint TINYINT(1), #null/empty for times considered exact, 0 for times
     # considered approximate, 1 for times considered exact
     KEY `trip_id` (trip_id),
-    KEY `arrival_time_seconds` (arrival_time_seconds),
-    KEY `departure_time_seconds` (departure_time_seconds),
     KEY `stop_id` (stop_id),
     KEY `stop_sequence` (stop_sequence),
     KEY `pickup_type` (pickup_type),
