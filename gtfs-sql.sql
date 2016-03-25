@@ -7,7 +7,8 @@ CREATE TABLE `agency` (
     agency_timezone VARCHAR(100) NOT NULL,
     agency_lang VARCHAR(100),
     agency_phone VARCHAR(100),
-    agency_fare_url VARCHAR(100)
+    agency_fare_url VARCHAR(100),
+    agency_email VARCHAR(255)
 );
 
 CREATE TABLE `calendar_dates` (
@@ -39,21 +40,19 @@ CREATE TABLE `calendar` (
 CREATE TABLE `fare_attributes` (
     id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
-    fare_id VARCHAR(100),
+    fare_id VARCHAR(100) NOT NULL,
     price VARCHAR(50) NOT NULL,
     currency_type VARCHAR(50) NOT NULL,
     payment_method TINYINT(1) NOT NULL,
     transfers TINYINT(1) NOT NULL,
     transfer_duration VARCHAR(10),
-    exception_type TINYINT(2) NOT NULL,
-    agency_id INT(100),
     KEY `fare_id` (fare_id)
 );
 
 CREATE TABLE `fare_rules` (
     id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
-    fare_id VARCHAR(100),
+    fare_id VARCHAR(100) NOT NULL,
     route_id VARCHAR(100),
     origin_id VARCHAR(100),
     destination_id VARCHAR(100),
@@ -65,7 +64,7 @@ CREATE TABLE `fare_rules` (
 CREATE TABLE `feed_info` (
     id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
-    feed_publisher_name VARCHAR(100),
+    feed_publisher_name VARCHAR(100) NOT NULL,
     feed_publisher_url VARCHAR(255) NOT NULL,
     feed_lang VARCHAR(255) NOT NULL,
     feed_start_date VARCHAR(8),
@@ -87,15 +86,15 @@ CREATE TABLE `frequencies` (
 CREATE TABLE `routes` (
     id INT(12) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     transit_system VARCHAR(50) NOT NULL,
-    route_id VARCHAR(100),
+    route_id VARCHAR(100) NOT NULL,
     agency_id VARCHAR(50),
     route_short_name VARCHAR(50) NOT NULL,
     route_long_name VARCHAR(255) NOT NULL,
-    route_type VARCHAR(2) NOT NULL, 
-    route_text_color VARCHAR(255),
-    route_color VARCHAR(255),
-    route_url VARCHAR(255),
     route_desc VARCHAR(255),
+    route_type VARCHAR(2) NOT NULL, 
+    route_url VARCHAR(255),
+    route_color VARCHAR(255),
+    route_text_color VARCHAR(255),
     KEY `agency_id` (agency_id),
     KEY `route_type` (route_type)
 );
@@ -116,18 +115,16 @@ CREATE TABLE `stop_times` (
     transit_system VARCHAR(50) NOT NULL,
     trip_id VARCHAR(100) NOT NULL,
     arrival_time VARCHAR(8) NOT NULL,
-    arrival_time_seconds INT(100),
     departure_time VARCHAR(8) NOT NULL,
-    departure_time_seconds INT(100),
     stop_id VARCHAR(100) NOT NULL,
     stop_sequence VARCHAR(100) NOT NULL,
     stop_headsign VARCHAR(50),
     pickup_type VARCHAR(2),
     drop_off_type VARCHAR(2),
     shape_dist_traveled VARCHAR(50),
+    timepoint TINYINT(1), #null/empty for times considered exact, 0 for times
+    # considered approximate, 1 for times considered exact
     KEY `trip_id` (trip_id),
-    KEY `arrival_time_seconds` (arrival_time_seconds),
-    KEY `departure_time_seconds` (departure_time_seconds),
     KEY `stop_id` (stop_id),
     KEY `stop_sequence` (stop_sequence),
     KEY `pickup_type` (pickup_type),
@@ -170,7 +167,7 @@ CREATE TABLE `trips` (
     transit_system VARCHAR(50) NOT NULL,
     route_id VARCHAR(100) NOT NULL,
     service_id VARCHAR(100) NOT NULL,
-    trip_id VARCHAR(255),
+    trip_id VARCHAR(255) NOT NULL,
     trip_headsign VARCHAR(255),
     trip_short_name VARCHAR(255),
     direction_id TINYINT(1), #0 for one direction, 1 for another.
