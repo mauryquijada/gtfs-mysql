@@ -1,21 +1,21 @@
 -- Run this sql script from the folder containing GTFS files
 
-
-TRUNCATE TABLE agency;
-TRUNCATE TABLE calendar;
-TRUNCATE TABLE calendar_dates;
-TRUNCATE TABLE fare_attributes;
-TRUNCATE TABLE fare_rules;
-TRUNCATE TABLE feed_info;
-TRUNCATE TABLE frequencies;
-TRUNCATE TABLE routes;
-TRUNCATE TABLE shapes;
-TRUNCATE TABLE stops;
-TRUNCATE TABLE stop_times;
-TRUNCATE TABLE transfers;
-TRUNCATE TABLE trips;
-
 SET @transit = "JUST_IMPORTED";
+
+DELETE FROM agency WHERE transit_system = @transit;
+DELETE FROM calendar WHERE transit_system = @transit;
+DELETE FROM calendar_dates WHERE transit_system = @transit;
+DELETE FROM fare_attributes WHERE transit_system = @transit;
+DELETE FROM fare_rules WHERE transit_system = @transit;
+DELETE FROM feed_info WHERE transit_system = @transit;
+DELETE FROM frequencies WHERE transit_system = @transit;
+DELETE FROM routes WHERE transit_system = @transit;
+DELETE FROM shapes WHERE transit_system = @transit;
+DELETE FROM stops WHERE transit_system = @transit;
+DELETE FROM stop_times WHERE transit_system = @transit;
+DELETE FROM transfers WHERE transit_system = @transit;
+DELETE FROM trips WHERE transit_system = @transit;
+
 
 LOAD DATA LOCAL INFILE 'agency.txt' INTO TABLE agency
     FIELDS TERMINATED BY ',' IGNORE 1 LINES
